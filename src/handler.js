@@ -29,7 +29,7 @@ const addNotesHandler = (req, h) => {
         noteId: id,
       },
     });
-    response.code("201");
+    response.code(201);
     return response;
   }
   const response = h.response({
