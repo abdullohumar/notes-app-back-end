@@ -103,4 +103,27 @@ const editNoteByIdHandler = (req, h) => {
   return response;
 };
 
-module.exports = { addNotesHandler, getAllNotesHandler, getNoteByIdHandler,editNoteByIdHandler };
+const deleteNoteByIdHandler = (req, h) => {
+  const {id} = req.params;
+
+  const index = notes.findIndex((note) => note.id === id);
+
+  if( index !== -1 ) {
+    notes.splice(index, 1);
+    const response = h.response({
+      status: 'success',
+      message: 'Catatan berhasil dihapus'
+    });
+    response.code = 200;
+    return response;
+  };
+
+  const response = h.response({
+    status: 'fail',
+    message : 'Gagal delete note'
+  });
+  response.code = '404';
+  return response;
+}
+
+module.exports = { addNotesHandler, getAllNotesHandler, getNoteByIdHandler, editNoteByIdHandler, deleteNoteByIdHandler};
